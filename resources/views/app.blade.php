@@ -7,6 +7,11 @@
         <title>{{ config('app.name') }}</title>
 
         <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+
+        <script>
+            window.AppName = "{{ config('app.name') }}"
+        </script>
+
         <script src="{{ mix('/js/app.js') }}" defer></script>
     </head>
     <body>
