@@ -16,7 +16,7 @@
                        id="password" type="password" placeholder="******************" v-model="form.password">
             </div>
             <div class="flex items-center justify-between">
-                <button class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded" type="button">
+                <button class="bg-blue-500 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded" type="submit">
                     Sign In
                 </button>
                 <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
@@ -45,10 +45,10 @@ export default {
             loginAction: 'auth/login'
         }),
 
-        async login() {
-            await this.loginAction(this.form)
-
-            await this.$router.replace({name: 'dashboard'});
+        login() {
+            return this.loginAction(this.form).then(() => {
+                return this.$router.replace({name: 'dashboard'});
+            });
         }
     }
 };

@@ -23,19 +23,16 @@ export default {
         },
     },
     actions: {
-        async login({dispatch}, credentials) {
-            await axios.get('/sanctum/csrf-cookie');
-            await axios.post('/api/auth/login', credentials);
+        login({dispatch}, credentials) {
 
-            return dispatch('me');
+            return axios.post('/api/auth/login', credentials).then(() => {
+                return dispatch('me');
+            }).catch((err) => {
+                console.error(err);
+            });
         },
         register({dispatch}, form) {
             return axios.post('/api/auth/register', form).then((response) => {
-                this.$app.flashMessage.success({
-                    title: 'User Registration',
-                    message: response.data.message,
-                });
-
                 return true;
             }).catch((error) => {
                 console.log(error);

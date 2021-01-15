@@ -43,8 +43,10 @@ router.beforeEach((to, from, next) => {
     }
 });
 
-new Vue({
-    el: '#app',
-    router,
-    store,
+store.dispatch('auth/me').then(() => {
+    new Vue({
+        el: '#app',
+        router,
+        store,
+    });
 });
