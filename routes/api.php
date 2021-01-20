@@ -11,6 +11,7 @@ Route::post('/auth/login', LoginController::class);
 
 Route::get('/search', [SearchController::class, 'list']);
 Route::post('/search', [SearchController::class, 'store']);
+Route::get('/search/{search}', [SearchController::class, 'view']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

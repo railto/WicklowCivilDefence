@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSearchRequest;
+use App\Http\Resources\SearchResource;
 use App\Http\Resources\SearchResourceCollection;
 use App\Models\Search;
 use Illuminate\Http\JsonResponse;
@@ -30,6 +31,17 @@ class SearchController extends Controller
         $searches = Search::all();
 
         return new SearchResourceCollection($searches);
+    }
+
+    /**
+     * Returns individual search
+     *
+     * @param Search $search
+     * @return SearchResource
+     */
+    public function view(Search $search): SearchResource
+    {
+        return new SearchResource($search);
     }
 
     /**
