@@ -44,4 +44,16 @@ class UserFactory extends Factory
             ];
         });
     }
+
+    /**
+     * @return UserFactory
+     */
+    public function write(): UserFactory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'role' => 'write'
+            ];
+        });
+    }
 }
