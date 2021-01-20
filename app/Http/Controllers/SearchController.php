@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSearchRequest;
+use App\Http\Resources\SearchResourceCollection;
 use App\Models\Search;
 use Illuminate\Http\JsonResponse;
 
@@ -17,6 +18,18 @@ class SearchController extends Controller
     {
         $this->middleware('auth:sanctum');
         $this->authorizeResource(Search::class);
+    }
+
+    /**
+     * Returns all searches
+     *
+     * @return SearchResourceCollection
+     */
+    public function list(): SearchResourceCollection
+    {
+        $searches = Search::all();
+
+        return new SearchResourceCollection($searches);
     }
 
     /**

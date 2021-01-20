@@ -17,8 +17,8 @@ class CreateSearchesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('created_by');
             $table->string('location');
-            $table->dateTime('start');
-            $table->dateTime('end')->nullable();
+            $table->timestamp('start');
+            $table->timestamp('end')->nullable();
             $table->string('type');
             $table->string('officer_in_charge');
             $table->string('search_manager');
@@ -27,6 +27,7 @@ class CreateSearchesTable extends Migration
             $table->string('radio_operator');
             $table->string('scribe');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('created_by')->references('id')->on('users');
         });

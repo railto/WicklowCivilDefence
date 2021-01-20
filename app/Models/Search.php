@@ -15,4 +15,6 @@ class Search extends Model
         'officer_in_charge', 'search_manager', 'safety_officer',
         'section_leader', 'radio_operator', 'scribe',
     ];
+
+
 }

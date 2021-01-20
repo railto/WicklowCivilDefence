@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/auth/register', RegisterController::class);
 Route::post('/auth/login', LoginController::class);
 
+Route::get('/search', [SearchController::class, 'list']);
 Route::post('/search', [SearchController::class, 'store']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
