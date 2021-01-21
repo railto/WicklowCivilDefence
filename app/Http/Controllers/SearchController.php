@@ -8,6 +8,7 @@ use App\Http\Requests\StoreSearchRequest;
 use App\Http\Resources\SearchResource;
 use App\Http\Resources\SearchResourceCollection;
 use App\Models\Search;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 
 class SearchController extends Controller
@@ -18,16 +19,18 @@ class SearchController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-        $this->authorizeResource(Search::class);
     }
 
     /**
      * Returns all searches
      *
      * @return SearchResourceCollection
+     * @throws AuthorizationException
      */
     public function list(): SearchResourceCollection
     {
+        $this->authorize('viewAny', Search::class);
+
         $searches = Search::all();
 
         return new SearchResourceCollection($searches);
@@ -38,9 +41,12 @@ class SearchController extends Controller
      *
      * @param Search $search
      * @return SearchResource
+     * @throws AuthorizationException
      */
     public function view(Search $search): SearchResource
     {
+        $this->authorize('view', $search);
+
         return new SearchResource($search);
     }
 
@@ -49,9 +55,12 @@ class SearchController extends Controller
      *
      * @param StoreSearchRequest $request
      * @return JsonResponse
+     * @throws AuthorizationException
      */
     public function store(StoreSearchRequest $request): JsonResponse
     {
+        $this->authorize('create', Search::class);
+
         $search = Search::create([
             'created_by' => auth()->user()->id,
             'location' => $request->get('location'),
