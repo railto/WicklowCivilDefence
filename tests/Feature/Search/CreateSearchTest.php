@@ -21,7 +21,7 @@ class CreateSearchTest extends TestCase
 
         $data = [
             'location' => $this->faker->streetName,
-            'start' => Carbon::now(),
+            'start' => Carbon::now()->toDateTimeString(),
             'type' => 'training',
             'officer_in_charge' => $this->faker->name,
             'search_manager' => $this->faker->name,
@@ -45,7 +45,7 @@ class CreateSearchTest extends TestCase
 
         $data = [
             'location' => $this->faker->streetName,
-            'start' => Carbon::now(),
+            'start' => Carbon::now()->toDateTimeString(),
             'type' => 'training',
             'officer_in_charge' => $this->faker->name,
             'search_manager' => $this->faker->name,
