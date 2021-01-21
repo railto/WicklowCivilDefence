@@ -47,4 +47,16 @@ class ViewSearchTest extends TestCase
         $response->assertStatus(401);
         $response->assertJsonMissing($search->toArray());
     }
+
+    /**
+     * Expect to see a 401, don't want to leak that the route doesn't exist
+     *
+     * @test
+     */
+    public function a_guest_can_not_view_a_search_that_does_not_exist()
+    {
+        $response = $this->getJson('/api/search/999');
+
+        $response->assertStatus(401);
+    }
 }
