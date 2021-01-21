@@ -10,8 +10,11 @@ jobs:
       mysql-service:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: wwcd_test
+        ports:
+          - 33306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Checkout code
@@ -33,17 +36,10 @@ jobs:
       - name: Generate App Key
         run: php artisan key:generate
 
-      - name: Install NPM dependencies
-        run: npm ci
-
-      - name: Compile assets
-        run: npm run production
-
       - name: Execute API tests
         env:
           DB_CONNECTION: mysql
           DB_DATABASE: wwcd_test
-          DB_PORT: 3306
+          DB_PORT: 33306
           DB_USER: root
-          DB_PASSWORD: root
         run: vendor/bin/phpunit --verbose
