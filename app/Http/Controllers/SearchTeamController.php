@@ -10,11 +10,6 @@ use Illuminate\Http\JsonResponse;
 
 class SearchTeamController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:sanctum');
-    }
-
     /**
      * @param StoreSearchTeamRequest $request
      * @param Search $search

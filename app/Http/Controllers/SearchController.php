@@ -14,14 +14,6 @@ use Illuminate\Http\JsonResponse;
 class SearchController extends Controller
 {
     /**
-     * SearchController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:sanctum');
-    }
-
-    /**
      * Returns all searches
      *
      * @return SearchResourceCollection
