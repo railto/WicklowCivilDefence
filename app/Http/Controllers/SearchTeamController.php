@@ -4,10 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSearchTeamRequest;
 use App\Models\Search;
+use App\Models\SearchTeam;
 use Illuminate\Http\JsonResponse;
 
 class SearchTeamController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum');
+        $this->authorizeResource(SearchTeam::class);
+    }
+
     /**
      * @param StoreSearchTeamRequest $request
      * @param Search $search
