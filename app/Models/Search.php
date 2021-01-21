@@ -24,4 +24,9 @@ class Search extends Model
     {
         return $this->hasMany(SearchTeam::class);
     }
+
+    public function radios(): HasMany
+    {
+        return $this->hasMany(SearchRadioAssignment::class);
+    }
 }
