@@ -3,6 +3,7 @@
 namespace Tests\Feature\Search;
 
 use App\Models\Search;
+use App\Models\SearchTeam;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -53,5 +54,40 @@ class SearchTeamsTest extends TestCase
 
         $response->assertStatus(403);
         $this->assertDatabaseMissing('search_teams', ['name' => $teamData['name']]);
+    }
+
+    /** @test */
+    public function write_user_can_update_team()
+    {
+        $this->withoutExceptionHandling();
+        $user = User::factory()->write()->create();
+        $search = Search::factory()->create(['created_by' => $user->id]);
+        $team = SearchTeam::factory()->create(['created_by' => $user->id, 'search_id' => $search->id]);
+        $updatedTeam = $team->toArray();
+        $updatedTeam['name'] = 'Updated Team';
+        $updatedTeam['medic'] = 'New Medic';
+
+        Sanctum::actingAs($user);
+        $response = $this->putJson("/api/search/{$search->id}/teams/{$team['id']}", $updatedTeam);
+
+        $response->assertStatus(200);
+        $this->assertDatabaseHas('search_teams', ['id' => $team['id'], 'name' => 'Updated Team', 'medic' => 'New Medic']);
+    }
+
+    /** @test */
+    public function read_user_can_not_update_team()
+    {
+        $user = User::factory()->read()->create();
+        $search = Search::factory()->create(['created_by' => $user->id]);
+        $team = SearchTeam::factory()->create(['created_by' => $user->id, 'search_id' => $search->id]);
+        $updatedTeam = $team->toArray();
+        $updatedTeam['name'] = 'Updated Team';
+        $updatedTeam['medic'] = 'New Medic';
+
+        Sanctum::actingAs($user);
+        $response = $this->putJson("/api/search/{$search->id}/teams/{$team['id']}", $updatedTeam);
+
+        $response->assertStatus(403);
+        $this->assertDatabaseMissing('search_teams', ['id' => $team['id'], 'name' => 'Updated Team', 'medic' => 'New Medic']);
     }
 }

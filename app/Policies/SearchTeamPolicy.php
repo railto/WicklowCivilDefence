@@ -18,7 +18,7 @@ class SearchTeamPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class SearchTeamPolicy
      */
     public function view(User $user, SearchTeam $searchTeam)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class SearchTeamPolicy
      */
     public function update(User $user, SearchTeam $searchTeam)
     {
-        //
+        return in_array($user->role, ['admin', 'write']);
     }
 
     /**
@@ -65,7 +65,7 @@ class SearchTeamPolicy
      */
     public function delete(User $user, SearchTeam $searchTeam)
     {
-        //
+        return false;
     }
 
     /**
@@ -77,7 +77,7 @@ class SearchTeamPolicy
      */
     public function restore(User $user, SearchTeam $searchTeam)
     {
-        //
+        return false;
     }
 
     /**
@@ -89,6 +89,6 @@ class SearchTeamPolicy
      */
     public function forceDelete(User $user, SearchTeam $searchTeam)
     {
-        //
+        return false;
     }
 }
