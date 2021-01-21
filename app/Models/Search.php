@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Search extends Model
@@ -16,5 +17,11 @@ class Search extends Model
         'section_leader', 'radio_operator', 'scribe',
     ];
 
-
+    /**
+     * @return HasMany
+     */
+    public function teams(): HasMany
+    {
+        return $this->hasMany(SearchTeam::class);
+    }
 }
