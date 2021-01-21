@@ -2,16 +2,16 @@ name: Tests
 
 on: [ push, pull_request ]
 
-services:
-  mysql-service:
-    image: mysql:8.0
-    env:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: wwcd_test
-
 jobs:
   tests:
     runs-on: ubuntu-latest
+
+    services:
+      mysql-service:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wwcd_test
 
     steps:
       - name: Checkout code
