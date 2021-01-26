@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Search;
 use App\Models\SearchRadioAssignment;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -36,11 +37,16 @@ class SearchRadioAssignmentPolicy
     /**
      * Determine whether the user can create models.
      *
-     * @param  \App\Models\User  $user
+     * @param \App\Models\User $user
+     * @param Search $search
      * @return mixed
      */
-    public function create(User $user)
+    public function create(User $user, Search $search)
     {
+        if (!is_null($search->end)) {
+            return $this->deny("You can not assign a radio to a search that has ended!");
+        }
+
         return in_array($user->role, ['admin', 'write']);
     }
 

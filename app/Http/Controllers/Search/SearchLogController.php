@@ -20,7 +20,7 @@ class SearchLogController extends Controller
      */
     public function store(Search $search, StoreSearchLogRequest $request): JsonResponse
     {
-        $this->authorize('create', SearchLog::class);
+        $this->authorize('create', [SearchLog::class, $search]);
 
         $log = $search->searchLogs()->create([
             'created_by' => auth()->user()->id,
@@ -43,7 +43,7 @@ class SearchLogController extends Controller
      */
     public function update(Search $search, SearchLog $log, StoreSearchLogRequest $request): JsonResponse
     {
-        $this->authorize('update', $log);
+        $this->authorize('update', [$log, $search]);
 
         $log->update($request->only(['team', 'area', 'start_time', 'end_time', 'notes']));
 

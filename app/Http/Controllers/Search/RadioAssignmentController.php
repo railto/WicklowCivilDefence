@@ -20,7 +20,7 @@ class RadioAssignmentController extends Controller
      */
     public function store(StoreSearchRadioAssignmentRequest $request, Search $search): JsonResponse
     {
-        $this->authorize('create', SearchRadioAssignment::class);
+        $this->authorize('create', [SearchRadioAssignment::class, $search]);
 
         $assignment = $search->radios()->create([
             'created_by' => auth()->user()->id,

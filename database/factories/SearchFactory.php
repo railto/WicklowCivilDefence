@@ -38,4 +38,14 @@ class SearchFactory extends Factory
             'scribe' => $this->faker->name,
         ];
     }
+
+    public function ended(): SearchFactory
+    {
+        return $this->state(function ($attributes) {
+            return [
+                'end' => Carbon::now()->toDateTimeString(),
+                'notes' => $this->faker->paragraph,
+            ];
+        });
+    }
 }

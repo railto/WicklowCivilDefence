@@ -20,7 +20,7 @@ class TeamController extends Controller
      */
     public function store(StoreSearchTeamRequest $request, Search $search): JsonResponse
     {
-        $this->authorize('create', SearchTeam::class);
+        $this->authorize('create', [SearchTeam::class, $search]);
 
         $team = $search->teams()->create([
             'created_by' => auth()->user()->id,

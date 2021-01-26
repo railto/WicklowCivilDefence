@@ -49,4 +49,23 @@ class CommsLogTest extends TestCase
         $response->assertStatus(403);
         $this->assertDatabaseMissing('search_comms_logs', $log);
     }
+
+    /** @test */
+    public function a_user_can_not_add_a_log_entry_to_a_search_that_has_ended()
+    {
+        $user = User::factory()->write()->create();
+        $search = Search::factory()->ended()->create(['created_by' => $user->id]);
+        $log = [
+            'time' => Carbon::now()->toDateTimeString(),
+            'call_sign' => $this->faker->word,
+            'message' => $this->faker->sentence,
+        ];
+
+        Sanctum::actingAs($user);
+        $response = $this->postJson("/api/searches/{$search->id}/logs/comms", $log);
+
+        $response->assertStatus(403);
+        $this->assertDatabaseMissing('search_comms_logs', $log);
+        $response->assertSee("You can not add a comms log entry to a search that has ended!");
+    }
 }

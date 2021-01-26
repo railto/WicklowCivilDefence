@@ -20,7 +20,7 @@ class CommsLogController extends Controller
      */
     public function store(Search $search, StoreSearchCommsLogRequest $request): JsonResponse
     {
-        $this->authorize('create', SearchCommsLog::class);
+        $this->authorize('create', [SearchCommsLog::class, $search]);
 
         $log = $search->commsLogs()->create([
             'created_by' => auth()->user()->id,
