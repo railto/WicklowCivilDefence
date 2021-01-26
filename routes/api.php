@@ -32,4 +32,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/search/{search}/logs/comms', [SearchCommsLogController::class, 'store']);
 
     Route::post('/search/{search}/logs/search', [SearchLogController::class, 'store']);
+    Route::put('/search/{search}/logs/search/{log}', [SearchLogController::class, 'update']);
 });

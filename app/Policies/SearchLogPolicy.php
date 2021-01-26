@@ -53,7 +53,7 @@ class SearchLogPolicy
      */
     public function update(User $user, SearchLog $searchLog)
     {
-        //
+        return in_array($user->role, ['admin', 'write']);
     }
 
     /**
