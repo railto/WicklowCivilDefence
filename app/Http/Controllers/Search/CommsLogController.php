@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Search;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSearchCommsLogRequest;
 use App\Http\Resources\SearchCommsLogResource;
 use App\Models\Search;
@@ -9,14 +10,15 @@ use App\Models\SearchCommsLog;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 
-class SearchCommsLogController extends Controller
+class CommsLogController extends Controller
 {
     /**
      * @param Search $search
      * @param StoreSearchCommsLogRequest $request
+     * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function store(Search $search, StoreSearchCommsLogRequest $request)
+    public function store(Search $search, StoreSearchCommsLogRequest $request): JsonResponse
     {
         $this->authorize('create', SearchCommsLog::class);
 

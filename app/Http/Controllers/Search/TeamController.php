@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Search;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSearchTeamRequest;
 use App\Http\Resources\SearchTeamResource;
 use App\Models\Search;
@@ -9,7 +10,7 @@ use App\Models\SearchTeam;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 
-class SearchTeamController extends Controller
+class TeamController extends Controller
 {
     /**
      * @param StoreSearchTeamRequest $request

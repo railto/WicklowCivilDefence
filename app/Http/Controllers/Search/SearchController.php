@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Search;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\EndSearchRequest;
 use App\Http\Requests\StoreSearchRequest;
 use App\Http\Resources\SearchResource;

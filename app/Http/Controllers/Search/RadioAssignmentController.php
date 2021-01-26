@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Search;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSearchRadioAssignmentRequest;
 use App\Http\Resources\SearchRadioAssignmentResource;
 use App\Models\Search;
@@ -9,7 +10,7 @@ use App\Models\SearchRadioAssignment;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 
-class SearchRadioAssignmentController extends Controller
+class RadioAssignmentController extends Controller
 {
     /**
      * @param StoreSearchRadioAssignmentRequest $request

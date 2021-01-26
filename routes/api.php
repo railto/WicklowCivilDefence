@@ -3,10 +3,10 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Search\SearchLogController;
-use App\Http\Controllers\SearchCommsLogController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\SearchRadioAssignmentController;
-use App\Http\Controllers\SearchTeamController;
+use App\Http\Controllers\Search\CommsLogController;
+use App\Http\Controllers\Search\SearchController;
+use App\Http\Controllers\Search\RadioAssignmentController;
+use App\Http\Controllers\Search\TeamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,12 +25,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/searches/{search}', [SearchController::class, 'view']);
     Route::post('/searches/{search}/end', [SearchController::class, 'end']);
 
-    Route::post('/searches/{search}/teams', [SearchTeamController::class, 'store']);
-    Route::put('/searches/{search}/teams/{team}', [SearchTeamController::class, 'update']);
+    Route::post('/searches/{search}/teams', [TeamController::class, 'store']);
+    Route::put('/searches/{search}/teams/{team}', [TeamController::class, 'update']);
 
-    Route::post('/searches/{search}/radios', [SearchRadioAssignmentController::class, 'store']);
+    Route::post('/searches/{search}/radios', [RadioAssignmentController::class, 'store']);
 
-    Route::post('/searches/{search}/logs/comms', [SearchCommsLogController::class, 'store']);
+    Route::post('/searches/{search}/logs/comms', [CommsLogController::class, 'store']);
 
     Route::post('/searches/{search}/logs/searches', [SearchLogController::class, 'store']);
     Route::put('/searches/{search}/logs/searches/{log}', [SearchLogController::class, 'update']);
