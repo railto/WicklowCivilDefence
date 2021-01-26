@@ -34,4 +34,9 @@ class Search extends Model
     {
         return $this->hasMany(SearchCommsLog::class);
     }
+
+    public function searchLogs(): HasMany
+    {
+        return $this->hasMany(SearchLog::class);
+    }
 }
