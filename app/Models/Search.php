@@ -29,4 +29,9 @@ class Search extends Model
     {
         return $this->hasMany(SearchRadioAssignment::class);
     }
+
+    public function commsLogs(): HasMany
+    {
+        return $this->hasMany(SearchCommsLog::class);
+    }
 }

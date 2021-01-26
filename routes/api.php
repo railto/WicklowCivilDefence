@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\SearchCommsLogController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SearchRadioAssignmentController;
 use App\Http\Controllers\SearchTeamController;
@@ -26,4 +27,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/search/{search}/teams/{team}', [SearchTeamController::class, 'update']);
 
     Route::post('/search/{search}/radios', [SearchRadioAssignmentController::class, 'store']);
+
+    Route::post('/search/{search}/logs/comms', [SearchCommsLogController::class, 'store']);
 });
