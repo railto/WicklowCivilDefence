@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EndSearchRequest;
 use App\Http\Requests\StoreSearchRequest;
 use App\Http\Resources\SearchResource;
 use App\Http\Resources\SearchResourceCollection;
@@ -67,5 +68,14 @@ class SearchController extends Controller
         ]);
 
         return (new SearchResource($search))->response()->setStatusCode(201);
+    }
+
+    public function end(Search $search, EndSearchRequest $request)
+    {
+        $this->authorize('end', $search);
+
+        $search->update($request->only(['end', 'notes']));
+
+        return (new SearchResource($search))->response()->setStatusCode(200);
     }
 }

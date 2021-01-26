@@ -23,6 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/search', [SearchController::class, 'list']);
     Route::post('/search', [SearchController::class, 'store']);
     Route::get('/search/{search}', [SearchController::class, 'view']);
+    Route::post('/search/{search}/end', [SearchController::class, 'end']);
 
     Route::post('/search/{search}/teams', [SearchTeamController::class, 'store']);
     Route::put('/search/{search}/teams/{team}', [SearchTeamController::class, 'update']);

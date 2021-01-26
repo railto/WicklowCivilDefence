@@ -59,6 +59,16 @@ class SearchPolicy
     }
 
     /**
+     * @param User $user
+     * @param Search $search
+     * @return bool
+     */
+    public function end(User $user, Search $search): bool
+    {
+        return $user->role === 'admin';
+    }
+
+    /**
      * Determine whether the user can delete the model.
      *
      * @param  User  $user

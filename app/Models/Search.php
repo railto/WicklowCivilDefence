@@ -12,9 +12,9 @@ class Search extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'created_by', 'location', 'start', 'type',
+        'created_by', 'location', 'start', 'end', 'type',
         'officer_in_charge', 'search_manager', 'safety_officer',
-        'section_leader', 'radio_operator', 'scribe',
+        'section_leader', 'radio_operator', 'scribe', 'notes',
     ];
 
     /**

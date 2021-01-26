@@ -26,6 +26,7 @@ class CreateSearchesTable extends Migration
             $table->string('section_leader');
             $table->string('radio_operator');
             $table->string('scribe');
+            $table->text('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
