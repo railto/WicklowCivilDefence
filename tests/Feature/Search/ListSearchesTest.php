@@ -20,7 +20,7 @@ class ListSearchesTest extends TestCase
         $search2 = Search::factory()->create(['created_by' => $user->id]);
 
         Sanctum::actingAs($user);
-        $response = $this->getJson('/api/search');
+        $response = $this->getJson('/api/searches');
 
         $response->assertStatus(200);
         $response->assertJsonFragment($search1->toArray());
@@ -34,7 +34,7 @@ class ListSearchesTest extends TestCase
         $search1 = Search::factory()->create(['created_by' => $user->id]);
         $search2 = Search::factory()->create(['created_by' => $user->id]);
 
-        $response = $this->getJson('/api/search');
+        $response = $this->getJson('/api/searches');
 
         $response->assertStatus(401);
         $response->assertJsonMissing($search1->toArray());

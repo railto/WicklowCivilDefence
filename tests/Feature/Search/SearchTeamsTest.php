@@ -29,7 +29,7 @@ class SearchTeamsTest extends TestCase
         ];
 
         Sanctum::actingAs($user);
-        $response = $this->postJson("/api/search/{$search->id}/teams", $teamData);
+        $response = $this->postJson("/api/searches/{$search->id}/teams", $teamData);
 
         $response->assertStatus(201);
         $this->assertDatabaseHas('search_teams', ['name' => $teamData['name']]);
@@ -50,7 +50,7 @@ class SearchTeamsTest extends TestCase
         ];
 
         Sanctum::actingAs($user);
-        $response = $this->postJson("/api/search/{$search->id}/teams", $teamData);
+        $response = $this->postJson("/api/searches/{$search->id}/teams", $teamData);
 
         $response->assertStatus(403);
         $this->assertDatabaseMissing('search_teams', ['name' => $teamData['name']]);
@@ -68,7 +68,7 @@ class SearchTeamsTest extends TestCase
         $updatedTeam['medic'] = 'New Medic';
 
         Sanctum::actingAs($user);
-        $response = $this->putJson("/api/search/{$search->id}/teams/{$team['id']}", $updatedTeam);
+        $response = $this->putJson("/api/searches/{$search->id}/teams/{$team['id']}", $updatedTeam);
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('search_teams', ['id' => $team['id'], 'name' => 'Updated Team', 'medic' => 'New Medic']);
@@ -85,7 +85,7 @@ class SearchTeamsTest extends TestCase
         $updatedTeam['medic'] = 'New Medic';
 
         Sanctum::actingAs($user);
-        $response = $this->putJson("/api/search/{$search->id}/teams/{$team['id']}", $updatedTeam);
+        $response = $this->putJson("/api/searches/{$search->id}/teams/{$team['id']}", $updatedTeam);
 
         $response->assertStatus(403);
         $this->assertDatabaseMissing('search_teams', ['id' => $team['id'], 'name' => 'Updated Team', 'medic' => 'New Medic']);

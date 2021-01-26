@@ -26,7 +26,7 @@ class CommsLogTest extends TestCase
         ];
 
         Sanctum::actingAs($user);
-        $response = $this->postJson("/api/search/{$search->id}/logs/comms", $log);
+        $response = $this->postJson("/api/searches/{$search->id}/logs/comms", $log);
 
         $response->assertStatus(201);
         $this->assertDatabaseHas('search_comms_logs', $log);
@@ -44,7 +44,7 @@ class CommsLogTest extends TestCase
         ];
 
         Sanctum::actingAs($user);
-        $response = $this->postJson("/api/search/{$search->id}/logs/comms", $log);
+        $response = $this->postJson("/api/searches/{$search->id}/logs/comms", $log);
 
         $response->assertStatus(403);
         $this->assertDatabaseMissing('search_comms_logs', $log);

@@ -31,7 +31,7 @@ class CreateSearchTest extends TestCase
             'scribe' => $this->faker->name,
         ];
 
-        $response = $this->postJson('/api/search', $data);
+        $response = $this->postJson('/api/searches', $data);
 
         $response->assertStatus(201);
         $this->assertDatabaseHas('searches', ['location' => $data['location'], 'type' => $data['type']]);
@@ -55,7 +55,7 @@ class CreateSearchTest extends TestCase
             'scribe' => $this->faker->name,
         ];
 
-        $response = $this->postJson('/api/search', $data);
+        $response = $this->postJson('/api/searches', $data);
 
         $response->assertStatus(403);
         $this->assertDatabaseMissing('searches', ['location' => $data['location'], 'type' => $data['type']]);

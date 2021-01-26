@@ -25,7 +25,7 @@ class RadioAssignmentTest extends TestCase
         ];
 
         Sanctum::actingAs($user);
-        $response = $this->postJson("/api/search/{$search->id}/radios", $assignmentData);
+        $response = $this->postJson("/api/searches/{$search->id}/radios", $assignmentData);
 
         $response->assertStatus(201);
         $this->assertDatabaseHas('search_radio_assignments', ['name' => $assignmentData['name'], 'call_sign' => $assignmentData['call_sign']]);
@@ -43,7 +43,7 @@ class RadioAssignmentTest extends TestCase
         ];
 
         Sanctum::actingAs($user);
-        $response = $this->postJson("/api/search/{$search->id}/radios", $assignmentData);
+        $response = $this->postJson("/api/searches/{$search->id}/radios", $assignmentData);
 
         $response->assertStatus(403);
         $this->assertDatabaseMissing('search_radio_assignments', ['name' => $assignmentData['name'], 'call_sign' => $assignmentData['call_sign']]);

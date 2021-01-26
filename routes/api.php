@@ -20,18 +20,18 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
-    Route::get('/search', [SearchController::class, 'list']);
-    Route::post('/search', [SearchController::class, 'store']);
-    Route::get('/search/{search}', [SearchController::class, 'view']);
-    Route::post('/search/{search}/end', [SearchController::class, 'end']);
+    Route::get('/searches', [SearchController::class, 'list']);
+    Route::post('/searches', [SearchController::class, 'store']);
+    Route::get('/searches/{search}', [SearchController::class, 'view']);
+    Route::post('/searches/{search}/end', [SearchController::class, 'end']);
 
-    Route::post('/search/{search}/teams', [SearchTeamController::class, 'store']);
-    Route::put('/search/{search}/teams/{team}', [SearchTeamController::class, 'update']);
+    Route::post('/searches/{search}/teams', [SearchTeamController::class, 'store']);
+    Route::put('/searches/{search}/teams/{team}', [SearchTeamController::class, 'update']);
 
-    Route::post('/search/{search}/radios', [SearchRadioAssignmentController::class, 'store']);
+    Route::post('/searches/{search}/radios', [SearchRadioAssignmentController::class, 'store']);
 
-    Route::post('/search/{search}/logs/comms', [SearchCommsLogController::class, 'store']);
+    Route::post('/searches/{search}/logs/comms', [SearchCommsLogController::class, 'store']);
 
-    Route::post('/search/{search}/logs/search', [SearchLogController::class, 'store']);
-    Route::put('/search/{search}/logs/search/{log}', [SearchLogController::class, 'update']);
+    Route::post('/searches/{search}/logs/searches', [SearchLogController::class, 'store']);
+    Route::put('/searches/{search}/logs/searches/{log}', [SearchLogController::class, 'update']);
 });

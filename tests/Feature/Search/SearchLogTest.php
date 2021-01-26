@@ -30,7 +30,7 @@ class SearchLogTest extends TestCase
         ];
 
         Sanctum::actingAs($user);
-        $response = $this->postJson("/api/search/{$search->id}/logs/search", $logData);
+        $response = $this->postJson("/api/searches/{$search->id}/logs/searches", $logData);
 
         $response->assertStatus(201);
         $this->assertDatabaseHas('search_logs', $logData);
@@ -49,7 +49,7 @@ class SearchLogTest extends TestCase
         ];
 
         Sanctum::actingAs($user);
-        $response = $this->postJson("/api/search/{$search->id}/logs/search", $logData);
+        $response = $this->postJson("/api/searches/{$search->id}/logs/searches", $logData);
 
         $response->assertStatus(403);
         $this->assertDatabaseMissing('search_logs', $logData);
@@ -67,7 +67,7 @@ class SearchLogTest extends TestCase
         $updatedLog['notes'] = 'Nothing found';
 
         Sanctum::actingAs($user);
-        $response = $this->putJson("/api/search/{$search->id}/logs/search/{$log->id}", $updatedLog);
+        $response = $this->putJson("/api/searches/{$search->id}/logs/searches/{$log->id}", $updatedLog);
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('search_logs', $updatedLog);
@@ -84,7 +84,7 @@ class SearchLogTest extends TestCase
         $updatedLog['notes'] = 'Nothing found';
 
         Sanctum::actingAs($user);
-        $response = $this->putJson("/api/search/{$search->id}/logs/search/{$log->id}", $updatedLog);
+        $response = $this->putJson("/api/searches/{$search->id}/logs/searches/{$log->id}", $updatedLog);
 
         $response->assertStatus(403);
         $this->assertDatabaseMissing('search_logs', $updatedLog);

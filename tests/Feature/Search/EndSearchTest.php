@@ -25,7 +25,7 @@ class EndSearchTest extends TestCase
         ];
 
         Sanctum::actingAs($user);
-        $response = $this->postJson("/api/search/{$search->id}/end", $data);
+        $response = $this->postJson("/api/searches/{$search->id}/end", $data);
 
         $response->assertStatus(200);
         $this->assertDatabaseHas('searches', ['id' => $search->id, 'notes' => $data['notes'], 'end' => $data['end']]);
@@ -42,7 +42,7 @@ class EndSearchTest extends TestCase
         ];
 
         Sanctum::actingAs($user);
-        $response = $this->postJson("/api/search/{$search->id}/end", $data);
+        $response = $this->postJson("/api/searches/{$search->id}/end", $data);
 
         $response->assertStatus(403);
         $this->assertDatabaseMissing('searches', ['id' => $search->id, 'notes' => $data['notes'], 'end' => $data['end']]);

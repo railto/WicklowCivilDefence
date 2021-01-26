@@ -19,7 +19,7 @@ class ViewSearchTest extends TestCase
         $search = Search::factory()->create(['created_by' => $user->id]);
 
         Sanctum::actingAs($user);
-        $response = $this->getJson("/api/search/{$search->id}");
+        $response = $this->getJson("/api/searches/{$search->id}");
 
         $response->assertStatus(200);
         $response->assertJsonFragment($search->toArray());
@@ -31,7 +31,7 @@ class ViewSearchTest extends TestCase
         $user = User::factory()->create();
 
         Sanctum::actingAs($user);
-        $response = $this->getJson('/api/search/999');
+        $response = $this->getJson('/api/searches/999');
 
         $response->assertStatus(404);
     }
@@ -42,7 +42,7 @@ class ViewSearchTest extends TestCase
         $user = User::factory()->create();
         $search = Search::factory()->create(['created_by' => $user->id]);
 
-        $response = $this->getJson("/api/search/{$search->id}");
+        $response = $this->getJson("/api/searches/{$search->id}");
 
         $response->assertStatus(401);
         $response->assertJsonMissing($search->toArray());
@@ -55,7 +55,7 @@ class ViewSearchTest extends TestCase
      */
     public function a_guest_can_not_view_a_search_that_does_not_exist()
     {
-        $response = $this->getJson('/api/search/999');
+        $response = $this->getJson('/api/searches/999');
 
         $response->assertStatus(401);
     }
