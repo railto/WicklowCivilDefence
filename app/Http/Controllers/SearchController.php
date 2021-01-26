@@ -66,6 +66,6 @@ class SearchController extends Controller
             'scribe' => $request->get('scribe'),
         ]);
 
-        return response()->json(['data' => ['id' => $search->id]], 201);
+        return (new SearchResource($search))->response()->setStatusCode(201);
     }
 }

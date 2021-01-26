@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSearchCommsLogRequest;
+use App\Http\Resources\SearchCommsLogResource;
 use App\Models\Search;
 use App\Models\SearchCommsLog;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 
 class SearchCommsLogController extends Controller
@@ -12,9 +14,9 @@ class SearchCommsLogController extends Controller
     /**
      * @param Search $search
      * @param StoreSearchCommsLogRequest $request
-     * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function store(Search $search, StoreSearchCommsLogRequest $request): JsonResponse
+    public function store(Search $search, StoreSearchCommsLogRequest $request)
     {
         $this->authorize('create', SearchCommsLog::class);
 
@@ -26,6 +28,6 @@ class SearchCommsLogController extends Controller
             'action' => $request->get('action'),
         ]);
 
-        return response()->json(['id' => $log->id], 201);
+        return (new SearchCommsLogResource($log))->response()->setStatusCode(201);
     }
 }

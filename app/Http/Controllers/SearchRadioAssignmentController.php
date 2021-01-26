@@ -3,13 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSearchRadioAssignmentRequest;
+use App\Http\Resources\SearchRadioAssignmentResource;
 use App\Models\Search;
 use App\Models\SearchRadioAssignment;
-use Illuminate\Http\Request;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\JsonResponse;
 
 class SearchRadioAssignmentController extends Controller
 {
-    public function store(StoreSearchRadioAssignmentRequest $request, Search $search)
+    /**
+     * @param StoreSearchRadioAssignmentRequest $request
+     * @param Search $search
+     * @return JsonResponse
+     * @throws AuthorizationException
+     */
+    public function store(StoreSearchRadioAssignmentRequest $request, Search $search): JsonResponse
     {
         $this->authorize('create', SearchRadioAssignment::class);
 
@@ -20,6 +28,6 @@ class SearchRadioAssignmentController extends Controller
             'tetra_number' => $request->get('tetra_number'),
         ]);
 
-        return response()->json(['id' => $assignment->id], 201);
+        return (new SearchRadioAssignmentResource($assignment))->response()->setStatusCode(201);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSearchTeamRequest;
+use App\Http\Resources\SearchTeamResource;
 use App\Models\Search;
 use App\Models\SearchTeam;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -30,7 +31,7 @@ class SearchTeamController extends Controller
             'responder_3' => $request->get('responder_3',)
         ]);
 
-        return response()->json(['id' => $team->id], 201);
+        return (new SearchTeamResource($team))->response()->setStatusCode(201);
     }
 
     /**
@@ -46,6 +47,6 @@ class SearchTeamController extends Controller
 
         $team->update($request->only('name', 'leader', 'medic', 'responder_1', 'responder_2', 'responder_3'));
 
-        return response()->json();
+        return (new SearchTeamResource($team))->response()->setStatusCode(200);
     }
 }
