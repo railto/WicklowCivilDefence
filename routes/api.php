@@ -7,6 +7,7 @@ use App\Http\Controllers\Search\CommsLogController;
 use App\Http\Controllers\Search\SearchController;
 use App\Http\Controllers\Search\RadioAssignmentController;
 use App\Http\Controllers\Search\TeamController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+    Route::patch('/users/{user}', [UserController::class, 'update']);
 
     Route::get('/searches', [SearchController::class, 'list']);
     Route::post('/searches', [SearchController::class, 'store']);

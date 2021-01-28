@@ -7,11 +7,13 @@ use App\Models\SearchCommsLog;
 use App\Models\SearchLog;
 use App\Models\SearchRadioAssignment;
 use App\Models\SearchTeam;
+use App\Models\User;
 use App\Policies\SearchCommsLogPolicy;
 use App\Policies\SearchLogPolicy;
 use App\Policies\SearchPolicy;
 use App\Policies\SearchRadioAssignmentPolicy;
 use App\Policies\SearchTeamPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -27,6 +29,7 @@ class AuthServiceProvider extends ServiceProvider
         SearchRadioAssignment::class => SearchRadioAssignmentPolicy::class,
         SearchCommsLog::class => SearchCommsLogPolicy::class,
         SearchLog::class => SearchLogPolicy::class,
+        User::class => UserPolicy::class,
     ];
 
     /**
